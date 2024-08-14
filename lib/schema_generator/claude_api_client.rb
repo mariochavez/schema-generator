@@ -12,18 +12,35 @@ module SchemaGenerator
       http.use_ssl = true
 
       request = Net::HTTP::Post.new(uri.path, {
-        'Content-Type' => 'application/json',
-        'X-API-Key' => SchemaGenerator.configuration.api_key
+        "Content-Type" => "application/json",
+        "X-API-Key" => SchemaGenerator.configuration.api_key
       })
 
+      prompt = <<~PROMPT
+        Task: Parse the given HTML content and extract all useful information to create a structured SEO LD+JSON Schema.
+
+        Instructions:
+        1. Analyze the HTML content thoroughly.
+        2. Identify key elements such as title, meta descriptions, headings, main content, images, and any other relevant SEO information.
+        3. Based on the extracted information, create a comprehensive LD+JSON Schema that best represents the page content for SEO purposes.
+        4. The output should be ONLY the LD+JSON Schema, without any additional explanation or description.
+        5. Ensure the schema is valid JSON and follows the Schema.org vocabulary.
+
+        HTML Content:
+        #{html}
+
+        Output the LD+JSON Schema:
+      PROMPT
+
       request.body = {
-        model: "claude-3-opus-20240229",
-        prompt: "Generate SEO Schema for this HTML:\n\n#{html}\n\nReturn only the JSON schema.",
-        max_tokens_to_sample: 1000
+        model: SchemaGenerator.configuration.model_name,
+        prompt: prompt,
+        max_tokens_to_sample: 2000,
+        temperature: 0.2
       }.to_json
 
       response = http.request(request)
-      
+
       if response.is_a?(Net::HTTPSuccess)
         JSON.parse(response.body)["completion"]
       else

@@ -1,9 +1,12 @@
 module SchemaGenerator
   class Configuration
-    attr_accessor :api_key
+    attr_accessor :api_key, :model_name, :llm_provider, :service_url
 
     def initialize
-      @api_key = ENV['CLAUDE_API_KEY']
+      @api_key = ENV["API_KEY"]
+      @model_name = ENV["MODEL_NAME"] || "claude-3-opus-20240229"
+      @llm_provider = (ENV["LLM_PROVIDER"] || :claude).to_sym
+      @service_url = ENV["SERVICE_URL"]
     end
   end
 
