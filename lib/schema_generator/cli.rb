@@ -26,9 +26,6 @@ module SchemaGenerator
         config.service_url = options[:service_url] if options[:service_url]
       end
 
-      puts ">>> #{options.inspect}"
-      puts "### #{SchemaGenerator.configuration.inspect}"
-      puts "--------"
       if SchemaGenerator.configuration.api_key.nil?
         raise SchemaGenerator::Error, "API key not found. Please set API_KEY environment variable or use --api_key option."
       end
