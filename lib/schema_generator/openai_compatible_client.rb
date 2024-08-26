@@ -39,6 +39,8 @@ module SchemaGenerator
         "https://api.openai.com/v1/chat/completions"
       when :ollama
         "http://localhost:11434/api/chat"
+      when :groq
+        "https://api.groq.com/openai/v1/chat/completions"
       else
         raise SchemaGenerator::Error, "Unsupported LLM provider for OpenAI-compatible client"
       end

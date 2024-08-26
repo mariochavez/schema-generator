@@ -5,7 +5,7 @@ module SchemaGenerator
   class CLI < Thor
     class_option :api_key, type: :string, desc: "LLM API key"
     class_option :model_name, type: :string, desc: "Model name (default: claude-3-opus-20240229)"
-    class_option :llm_provider, type: :string, desc: "LLM provider (openai, ollama, or claude)"
+    class_option :llm_provider, type: :string, desc: "LLM provider (openai, ollama, claude, or groq)"
     class_option :service_url, type: :string, desc: "Custom service URL"
     class_option :exclude, type: :string, desc: "Comma-separated list of URLs to exclude"
     class_option :verbose, type: :boolean, desc: "Enable verbose logging"
@@ -43,8 +43,8 @@ module SchemaGenerator
         raise SchemaGenerator::Error, "Model name not found. Please set MODEL_NAME environment variable or use --model_name option."
       end
 
-      unless [:openai, :ollama, :claude].include?(SchemaGenerator.configuration.llm_provider)
-        raise SchemaGenerator::Error, "Invalid LLM provider. Please choose openai, ollama, or claude."
+      unless [:openai, :ollama, :claude, :groq].include?(SchemaGenerator.configuration.llm_provider)
+        raise SchemaGenerator::Error, "Invalid LLM provider. Please choose openai, ollama, claude, or groq."
       end
 
       SchemaGenerator.configuration.logger.debug("Configuration set up successfully") if options[:verbose]

@@ -15,7 +15,7 @@ module SchemaGenerator
         schema = case SchemaGenerator.configuration.llm_provider
         when :claude
           ClaudeAPIClient.generate_seo_schema(html)
-        when :openai, :ollama
+        when :openai, :ollama, :groq
           OpenAICompatibleClient.generate_seo_schema(html)
         else
           raise Error, "Unsupported LLM provider"
