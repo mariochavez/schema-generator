@@ -27,7 +27,7 @@ module SchemaGenerator
       if response.is_a?(Net::HTTPSuccess)
         JSON.parse(response.body)["choices"][0]["message"]["content"].strip
       else
-        raise Error, "Failed to generate SEO schema: #{response.code} #{response.message}"
+        raise SchemaGenerator::Error, "Failed to generate SEO schema: #{response.code} #{response.message}"
       end
     end
 
@@ -40,7 +40,7 @@ module SchemaGenerator
       when :ollama
         "http://localhost:11434/api/chat"
       else
-        raise Error, "Unsupported LLM provider for OpenAI-compatible client"
+        raise SchemaGenerator::Error, "Unsupported LLM provider for OpenAI-compatible client"
       end
     end
 

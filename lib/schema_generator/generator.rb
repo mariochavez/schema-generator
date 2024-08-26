@@ -5,7 +5,9 @@ module SchemaGenerator
     def self.generate(url)
       domain = URI(url).host
       sitemap_url = "#{url}/sitemap.xml"
-      urls = SitemapFetcher.fetch(sitemap_url)
+      urls = SitemapFetcher.fetch(sitemap_url).reject do |url|
+        SchemaGenerator.configuration.exclude_list.any? { |filter| url.include?(filter) }
+      end
 
       schemas = {}
       urls.each do |page_url|

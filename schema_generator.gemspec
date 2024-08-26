@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.email = ["mario.chavez@gmail.com"]
 
   spec.summary = "Generate SEO schemas for websites"
-  spec.description = "A CLI tool to generate SEO schemas for websites using Claude AI"
-  spec.homepage = "https://github.com/yourusername/schema_generator"
+  spec.description = "A CLI tool to generate SEO schemas for websites using AI"
+  spec.homepage = "https://github.com/mariochavez/schema_generator"
   spec.license = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.5.0")
 

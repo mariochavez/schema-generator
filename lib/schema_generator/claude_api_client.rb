@@ -44,7 +44,7 @@ module SchemaGenerator
       if response.is_a?(Net::HTTPSuccess)
         JSON.parse(response.body)["completion"]
       else
-        raise Error, "Failed to generate SEO schema: #{response.code} #{response.message}"
+        raise SchemaGenerator::Error, "Failed to generate SEO schema: #{response.code} #{response.message}"
       end
     end
   end

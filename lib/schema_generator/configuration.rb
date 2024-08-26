@@ -23,6 +23,10 @@ module SchemaGenerator
       logger.level = Logger::WARN
       logger
     end
+
+    def reset_logger
+      @logger = default_logger
+    end
   end
 
   class << self

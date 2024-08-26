@@ -1,3 +1,4 @@
+require "logger"
 require "schema_generator/version"
 require "schema_generator/configuration"
 require "schema_generator/cli"

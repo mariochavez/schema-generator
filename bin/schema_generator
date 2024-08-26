@@ -2,6 +2,6 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "schema_generator"
+require_relative "../lib/schema_generator"
 
 SchemaGenerator::CLI.start(ARGV)
