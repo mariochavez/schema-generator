@@ -1,6 +1,6 @@
 module SchemaGenerator
   class Configuration
-    attr_accessor :api_key, :model_name, :llm_provider, :service_url
+    attr_accessor :api_key, :model_name, :llm_provider, :service_url, :exclude_list
 
     def initialize
       @api_key = ENV["API_KEY"]
